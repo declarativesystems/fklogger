@@ -2,7 +2,7 @@
   "name": "fklogger",
   "version": "1.0.1",
   "description": "fklogger for javascript - log stuff!",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "babel src -d dist",
     "test": "jest",
