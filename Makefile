@@ -1,5 +1,5 @@
 build: test
-	npm build
+	npm run-script build
 
 test: eslint
 	npm test
@@ -15,3 +15,4 @@ node_modules:
 
 clean:
 	rm -rf node_modules
+	rm -rf dist
