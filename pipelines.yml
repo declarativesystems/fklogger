@@ -1,0 +1,86 @@
+apiVersion: v1.1
+resources:
+  - name: gitfklogger
+    type: GitRepo
+    configuration:
+      gitProvider: github_geoffwilliams               # Change to your integration
+      path: declarativesystems/fklogger
+pipelines:
+  - name:   fklogger
+    configuration:
+      runtime:
+        type: image
+        image:
+          # see https://www.jfrog.com/confluence/display/JFROG/Runtime+Images#RuntimeImages-Go
+          auto:
+            language: node
+            versions:
+              - "12.14.0"
+    steps:
+      - name: build
+        type: NpmBuild
+        configuration:
+          #inherits from bash
+          #npmArgs: "-ddd"
+
+          # ohhhhhhhh this is the repository to READ artifacts from ffs
+          repositoryName:   npm
+          sourceLocation:   .
+
+          integrations:
+            - name:         Artifactory
+          inputResources:
+            - name:        gitfklogger
+
+        execution:
+          onStart:
+            - echo "Preparing for work..."
+          onSuccess:
+            - echo "Job well done!"
+          onFailure:
+            - echo "uh oh, something went wrong"
+          onComplete:                                  #always
+            - echo "Cleaning up some stuff"
+
+
+      - name: test
+        type: Bash
+        configuration:
+          inputResources:
+            - name: gitfklogger
+          inputSteps:
+            - name: build
+        execution:
+          onStart:
+            - pushd $res_gitfklogger_resourcePath
+            - make test
+
+      - name: publish
+        type: NpmPublish
+        configuration:
+          # for payloadType npm:
+          repositoryName:      npm-local    # required, npm repository name on artifactory
+          forceXrayScan:        false     # optional
+#          failOnScan:           <boolean>  # default true
+          #autoPublishBuildInfo: <boolean>       # optional
+
+          integrations:
+            - name:        Artifactory
+          inputSteps:
+
+            - name:         test               # required
+#          outputResources:
+#            - name:         <build info>                 # optional
+
+        execution:
+          onStart:
+            # seriously???
+            - export inputNpmBuildStepName="build"
+
+            - echo "Preparing for work..."
+          onSuccess:
+            - echo "Job well done!"
+          onFailure:
+            - echo "uh oh, something went wrong"
+          onComplete: #always
+            - echo "Cleaning up some stuff"

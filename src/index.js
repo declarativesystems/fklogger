@@ -44,7 +44,7 @@ export const stdoutLogger = {
   },
 };
 
-export const flogger = {
+export const fklogger = {
   level: levelInfo,
   tag: "",
   logger: "JEST_WORKER_ID" in process.env

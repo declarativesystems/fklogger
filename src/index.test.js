@@ -1,8 +1,8 @@
 // todo write a test suite ;-)
 beforeEach(async () => {
-  console.log("setup...")
-})
+  // something
+});
 
 test("a test", () => {
-  expect(true).toBeDefined()
-})
+  expect(true).toBeDefined();
+});

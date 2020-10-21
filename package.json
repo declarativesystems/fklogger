@@ -1,15 +1,15 @@
 {
-  "name": "flogger",
+  "name": "fklogger",
   "version": "1.0.0",
-  "description": "flogger for javascript - log stuff!",
+  "description": "fklogger for javascript - log stuff!",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
-    "lint": "eslint src"
+    "eslint": "eslint src"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/declarativesystems/flogger.git"
+    "url": "git+https://github.com/declarativesystems/fklogger.git"
   },
   "keywords": [
     "logger",
@@ -19,9 +19,9 @@
   "author": "Geoff Williams <geoff@declarativesystems.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/declarativesystems/flogger/issues"
+    "url": "https://github.com/declarativesystems/fklogger/issues"
   },
-  "homepage": "https://github.com/declarativesystems/flogger#readme",
+  "homepage": "https://github.com/declarativesystems/fklogger#readme",
   "devDependencies": {
     "eslint": "^7.11.0",
     "eslint-config-airbnb-base": "^14.2.0",
