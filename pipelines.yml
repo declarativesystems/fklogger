@@ -20,9 +20,6 @@ pipelines:
       - name: build
         type: NpmBuild
         configuration:
-          #inherits from bash
-          #npmArgs: "-ddd"
-
           # ohhhhhhhh this is the repository to READ artifacts from ffs
           repositoryName:   npm
           sourceLocation:   .
@@ -43,6 +40,8 @@ pipelines:
             - echo "[✓] build"
           onFailure:
             - echo "[✖] build"
+            - echo "files in working dir:"
+            - find
           onComplete:                                  #always
             - echo "Build environment info:"
             - pushd $res_gitfklogger_resourcePath
