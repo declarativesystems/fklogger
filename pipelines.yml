@@ -24,7 +24,7 @@ pipelines:
 
     steps:
       - name: bild
-        type: declarativesystems/HealthCheck
+        type: declarativesystems/nodejs
 #        type: NpmBuild
 #        configuration:
           # ohhhhhhhh this is the repository to READ artifacts from ffs
