@@ -21,7 +21,7 @@ pipelines:
               tag: 0.0.0-0
               #options: "-e HOME=/root"
               registry: Artifactory            # if custom image is private, an integration is required for authentication
-                sourceRepository: docker-local       # required if registry is Artifactory. e.g. docker-local
+              sourceRepository: docker-local       # required if registry is Artifactory. e.g. docker-local
 
 #          auto:
 #            language: node
