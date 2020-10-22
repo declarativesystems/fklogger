@@ -21,13 +21,12 @@ pipelines:
         type: NpmBuild
         configuration:
           # ohhhhhhhh this is the repository to READ artifacts from ffs
-          repositoryName:   npm
-          sourceLocation:   .
-
+          repositoryName: npm
+          sourceLocation: .
           integrations:
-            - name:         Artifactory
+            - name: Artifactory
           inputResources:
-            - name:        gitfklogger
+            - name: gitfklogger
 
         execution:
           onStart:
@@ -40,8 +39,8 @@ pipelines:
             - echo "[✓] build"
           onFailure:
             - echo "[✖] build"
-            - echo "files in working dir:"
-            - find
+            - echo "try to find build logs:"
+            - find / -iname build_logs
           onComplete:                                  #always
             - echo "Build environment info:"
             - pushd $res_gitfklogger_resourcePath
@@ -65,16 +64,14 @@ pipelines:
         type: NpmPublish
         configuration:
           repositoryName:      npm-local    # required, npm repository name on artifactory
-          forceXrayScan:        false     # optional
           integrations:
             - name:        Artifactory
           inputSteps:
             - name:         test               # required
         execution:
           onStart:
-            # seriously??? (yes its required)
+            - echo "exporting build step name (vital)"
             - export inputNpmBuildStepName="build"
-            - echo "Preparing for work..."
           onSuccess:
             - echo "[✓] publish"
           onFailure:
