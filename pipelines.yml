@@ -43,8 +43,7 @@ pipelines:
             - echo "try to find build logs RAGE:"
             - find / -iname build_logs -exec cat {} \;
             - echo "a broken npnrc file"
-            - pushd $res_gitfklogger_resourcePath
-            - cat .npmrc
+            - cat /root/.npmrc
             # - find / -iname stepletScript.sh -exec cat {} \;
           onComplete:                                  #always
             - echo "Build environment info:"
