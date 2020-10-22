@@ -38,11 +38,12 @@ pipelines:
             - nvm install 15.0.1
             - node --version
           onSuccess:
-            - echo "Job well done!"
+            - echo "[✓] build"
           onFailure:
-            - echo "uh oh, something went wrong"
+            - echo "[✖] build"
           onComplete:                                  #always
             - echo "Build environment info:"
+            - pushd $res_gitfklogger_resourcePath
             - npm run-script info
 
 
@@ -62,29 +63,18 @@ pipelines:
       - name: publish
         type: NpmPublish
         configuration:
-          # for payloadType npm:
           repositoryName:      npm-local    # required, npm repository name on artifactory
           forceXrayScan:        false     # optional
-#          failOnScan:           <boolean>  # default true
-          #autoPublishBuildInfo: <boolean>       # optional
-
           integrations:
             - name:        Artifactory
           inputSteps:
-
             - name:         test               # required
-#          outputResources:
-#            - name:         <build info>                 # optional
-
         execution:
           onStart:
-            # seriously???
+            # seriously??? (yes its required)
             - export inputNpmBuildStepName="build"
-
             - echo "Preparing for work..."
           onSuccess:
-            - echo "Job well done!"
+            - echo "[✓] publish"
           onFailure:
-            - echo "uh oh, something went wrong"
-          onComplete: #always
-            - echo "Cleaning up some stuff"
+            - echo "[✖] publish"
