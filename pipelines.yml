@@ -61,6 +61,7 @@ pipelines:
             - node --version
             - npm --version
             - npm run-script info
+            - npm run-script info
 
 
 
