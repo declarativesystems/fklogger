@@ -33,7 +33,7 @@ pipelines:
             - echo "Upgrading nodeJS..."
             - export NVM_DIR="$HOME/.nvm"
             - ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm'
-            - nvm install 15.0.1
+# breaks everything            - nvm install 15.0.1
             - node --version
           onSuccess:
             - echo "[✓] build"
