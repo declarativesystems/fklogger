@@ -36,10 +36,10 @@ pipelines:
             - name: gitfklogger
 
         execution:
-          onStart:
+#          onStart:
             # are u fkin kiddin me?
-            - pushd $res_gitfklogger_resourcePath
-            - retry_command jfrog rt config --url $int_Artifactory_url --user $int_Artifactory_user --apikey $int_Artifactory_apikey --interactive=false
+#            - pushd $res_gitfklogger_resourcePath
+#            - retry_command jfrog rt config --url $int_Artifactory_url --user $int_Artifactory_user --apikey $int_Artifactory_apikey --interactive=false
 
           onSuccess:
             - echo "[✓] build"
