@@ -31,10 +31,10 @@ pipelines:
 #          npmArgs: "--verbose"
 #          repositoryName: npm
 #          sourceLocation: .
-#          integrations:
-#            - name: Artifactory
-#          inputResources:
-#            - name: gitfklogger
+          integrations:
+            - name: Artifactory
+          inputResources:
+            - name: gitfklogger
 #
 #        execution:
 ##          onStart:
@@ -77,7 +77,7 @@ pipelines:
         execution:
           onStart:
             - pushd $res_gitfklogger_resourcePath
-            - make test
+#            - make test
 
       - name: publish
         type: NpmPublish
