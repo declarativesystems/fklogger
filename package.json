@@ -1,6 +1,6 @@
 {
   "name": "fklogger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "fklogger for javascript - log stuff!",
   "main": "index.js",
   "scripts": {
