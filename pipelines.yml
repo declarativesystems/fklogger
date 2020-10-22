@@ -40,8 +40,9 @@ pipelines:
             - echo "[✓] build"
           onFailure:
             - echo "[✖] build"
-            - echo "try to find build logs:"
-            - find / -iname stepletScript.sh -exec cat {} \;
+            - echo "try to find build logs RAGE:"
+            - find / -iname build_logs -exec cat {} \;
+            # - find / -iname stepletScript.sh -exec cat {} \;
           onComplete:                                  #always
             - echo "Build environment info:"
             - env |grep ^PATH=
