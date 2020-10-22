@@ -17,7 +17,7 @@ pipelines:
           # https://www.jfrog.com/confluence/display/JFROG/Choosing+your+Runtime+Image
           custom:
             name: "declarativesystems.jfrog.io/docker/docker-local/nodejs"
-            tag: 0.0.0-0
+            tag: 0.0.0-1
             #options: "-e HOME=/root"
             registry: Artifactory            # if custom image is private, an integration is required for authentication
             sourceRepository: docker-local       # required if registry is Artifactory. e.g. docker-local
