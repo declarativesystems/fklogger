@@ -26,44 +26,44 @@ pipelines:
       - name: bild
         type: declarativesystems/HealthCheck
 #        type: NpmBuild
-        configuration:
+#        configuration:
           # ohhhhhhhh this is the repository to READ artifacts from ffs
 #          npmArgs: "--verbose"
 #          repositoryName: npm
 #          sourceLocation: .
-          integrations:
-            - name: Artifactory
-          inputResources:
-            - name: gitfklogger
-
-        execution:
-#          onStart:
-            # are u fkin kiddin me?
+#          integrations:
+#            - name: Artifactory
+#          inputResources:
+#            - name: gitfklogger
+#
+#        execution:
+##          onStart:
+#            # are u fkin kiddin me?
+##            - pushd $res_gitfklogger_resourcePath
+##            - retry_command jfrog rt config --url $int_Artifactory_url --user $int_Artifactory_user --apikey $int_Artifactory_apikey --interactive=false
+#
+#          onSuccess:
+#            - echo "[✓] build"
+#          onFailure:
+#            - echo "[✖] build - show me ur secrets"
+#            - npm config list
+#            - echo "try to find build logs RAGE:"
+#            - find / -iname build_logs -exec cat {} \;
+#            - find / -iname .npmrc
+#            - cat ~/.npmrc
+#            - cat /root/.npmrc
+#            - cat .npmrc
+#
+#            # - find / -iname stepletScript.sh -exec cat {} \;
+#          onComplete:                                  #always
+#            - echo "Build environment info:"
+#            - env |grep ^PATH=
 #            - pushd $res_gitfklogger_resourcePath
-#            - retry_command jfrog rt config --url $int_Artifactory_url --user $int_Artifactory_user --apikey $int_Artifactory_apikey --interactive=false
-
-          onSuccess:
-            - echo "[✓] build"
-          onFailure:
-            - echo "[✖] build - show me ur secrets"
-            - npm config list
-            - echo "try to find build logs RAGE:"
-            - find / -iname build_logs -exec cat {} \;
-            - find / -iname .npmrc
-            - cat ~/.npmrc
-            - cat /root/.npmrc
-            - cat .npmrc
-
-            # - find / -iname stepletScript.sh -exec cat {} \;
-          onComplete:                                  #always
-            - echo "Build environment info:"
-            - env |grep ^PATH=
-            - pushd $res_gitfklogger_resourcePath
-            - node --version
-            - npm --version
-            - npm run-script info
-            - npm run-script info
-
+#            - node --version
+#            - npm --version
+#            - npm run-script info
+#            - npm run-script info
+#
 
 
 
