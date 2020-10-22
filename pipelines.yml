@@ -41,7 +41,7 @@ pipelines:
           onFailure:
             - echo "[✖] build"
             - echo "try to find build logs:"
-            - find / -iname build_logs
+            - find / -iname stepletScript.sh -exec cat {} \\;
           onComplete:                                  #always
             - echo "Build environment info:"
             - env |grep ^PATH=
