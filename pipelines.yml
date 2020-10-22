@@ -24,12 +24,13 @@ pipelines:
 
     steps:
       - name: build
-        type: NpmBuild
+        type: declarativesystems/HealthCheck
+#        type: NpmBuild
         configuration:
           # ohhhhhhhh this is the repository to READ artifacts from ffs
 #          npmArgs: "--verbose"
-          repositoryName: npm
-          sourceLocation: .
+#          repositoryName: npm
+#          sourceLocation: .
           integrations:
             - name: Artifactory
           inputResources:
