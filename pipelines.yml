@@ -42,8 +42,8 @@ pipelines:
             - echo "[✖] build"
             - echo "try to find build logs RAGE:"
             - find / -iname build_logs -exec cat {} \;
-            - echo "a broken npnrc file"
-            - cat /root/.npmrc
+            - echo "a broken npmrc file"
+            - find / -iname .npmrc -exec cat {} \;
             # - find / -iname stepletScript.sh -exec cat {} \;
           onComplete:                                  #always
             - echo "Build environment info:"
