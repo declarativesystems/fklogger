@@ -31,6 +31,7 @@ pipelines:
 #          npmArgs: "--verbose"
 #          repositoryName: npm
 #          sourceLocation: .
+        configuration:
           integrations:
             - name: Artifactory
           inputResources:
@@ -55,7 +56,6 @@ pipelines:
 #            - cat .npmrc
 #
 #            # - find / -iname stepletScript.sh -exec cat {} \;
-#          onComplete:                                  #always
 #            - echo "Build environment info:"
 #            - env |grep ^PATH=
 #            - pushd $res_gitfklogger_resourcePath
