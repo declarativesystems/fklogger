@@ -36,14 +36,22 @@ pipelines:
             - name: gitfklogger
 
         execution:
+          onStart:
+            # are u fkin kiddin me?
+            - pushd $res_gitFkLogger_resourcePath
+            - retry_command jfrog rt config --url $int_Artifactory_url --user $int_Artifactory_user --apikey $int_Artifactory_apikey --interactive=false
+
           onSuccess:
             - echo "[✓] build"
           onFailure:
             - echo "[✖] build"
             - echo "try to find build logs RAGE:"
             - find / -iname build_logs -exec cat {} \;
-            - echo "a broken npmrc file"
-            - find / -iname .npmrc -exec cat {} \;
+            - find / -iname .npmrc
+            - cat ~/.npmrc
+            - cat /root/.npmrc
+            - cat .npmrc
+
             # - find / -iname stepletScript.sh -exec cat {} \;
           onComplete:                                  #always
             - echo "Build environment info:"
