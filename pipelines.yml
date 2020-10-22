@@ -36,13 +36,6 @@ pipelines:
             - name: gitfklogger
 
         execution:
-#          onStart:
-#            - echo "Upgrading nodeJS..."
-#            - export NVM_DIR="$HOME/.nvm"
-#            - ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm'
-## breaks everything
-#            - nvm install 15.0.1
-#            - node --version
           onSuccess:
             - echo "[✓] build"
           onFailure:
@@ -51,8 +44,12 @@ pipelines:
             - find / -iname build_logs
           onComplete:                                  #always
             - echo "Build environment info:"
+            - env |grep ^PATH=
             - pushd $res_gitfklogger_resourcePath
+            - node --version
+            - npm --version
             - npm run-script info
+
 
 
 
