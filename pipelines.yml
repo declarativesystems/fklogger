@@ -7,24 +7,27 @@ resources:
       path: declarativesystems/fklogger
 pipelines:
   - name:   fklogger
-    execution:
-      onStart:
-        - echo "if at first u dont succeed..."
-        - echo "Upgrading nodeJS..."
-        - export NVM_DIR="$HOME/.nvm"
-        - ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm'
-        # breaks everything
-        - nvm install 15.0.1
-        - node --version
     configuration:
       runtime:
         type: image
         image:
           # see https://www.jfrog.com/confluence/display/JFROG/Runtime+Images#RuntimeImages-Go
-          auto:
-            language: node
-            versions:
-              - "12.14.0"
+
+          # custom image
+          # https://www.jfrog.com/confluence/display/JFROG/Choosing+your+Runtime+Image
+          image:
+            custom:
+              name: "declarativesystems.jfrog.io/docker/docker-local/nodejs"
+              tag: 0.0.0-0
+              #options: "-e HOME=/root"
+              registry: Artifactory            # if custom image is private, an integration is required for authentication
+                sourceRepository: docker-local       # required if registry is Artifactory. e.g. docker-local
+
+#          auto:
+#            language: node
+#            versions:
+#              - "12.14.0"
+#                "declarativesystems.jfrog.io/docker/docker-local:0.0.0-0"
     steps:
       - name: build
         type: NpmBuild
