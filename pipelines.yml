@@ -23,7 +23,7 @@ pipelines:
             sourceRepository: docker-local       # required if registry is Artifactory. e.g. docker-local
 
     steps:
-      - name: build
+      - name: bild
         type: declarativesystems/HealthCheck
 #        type: NpmBuild
         configuration:
@@ -73,7 +73,7 @@ pipelines:
           inputResources:
             - name: gitfklogger
           inputSteps:
-            - name: build
+            - name: bild
         execution:
           onStart:
             - pushd $res_gitfklogger_resourcePath
