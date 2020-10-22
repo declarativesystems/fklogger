@@ -4,6 +4,7 @@
   "description": "fklogger for javascript - log stuff!",
   "main": "dist/index.js",
   "scripts": {
+    "info": "node --version && npm --version && babel --version && eslint --version",
     "build": "babel src -d dist",
     "test": "jest src",
     "eslint": "eslint src"

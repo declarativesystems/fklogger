@@ -40,6 +40,7 @@ pipelines:
           onFailure:
             - echo "uh oh, something went wrong"
           onComplete:                                  #always
+            - npm run-script info
             - echo "Cleaning up some stuff"
 
 
