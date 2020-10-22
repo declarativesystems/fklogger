@@ -7,6 +7,15 @@ resources:
       path: declarativesystems/fklogger
 pipelines:
   - name:   fklogger
+    execution:
+      onStart:
+        - echo "if at first u dont succeed..."
+        - echo "Upgrading nodeJS..."
+        - export NVM_DIR="$HOME/.nvm"
+        - ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm'
+        # breaks everything
+        - nvm install 15.0.1
+        - node --version
     configuration:
       runtime:
         type: image
@@ -30,13 +39,13 @@ pipelines:
             - name: gitfklogger
 
         execution:
-          onStart:
-            - echo "Upgrading nodeJS..."
-            - export NVM_DIR="$HOME/.nvm"
-            - ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm'
-# breaks everything
-            - nvm install 15.0.1
-            - node --version
+#          onStart:
+#            - echo "Upgrading nodeJS..."
+#            - export NVM_DIR="$HOME/.nvm"
+#            - ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm'
+## breaks everything
+#            - nvm install 15.0.1
+#            - node --version
           onSuccess:
             - echo "[✓] build"
           onFailure:
