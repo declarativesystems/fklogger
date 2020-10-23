@@ -17,81 +17,28 @@ pipelines:
           # https://www.jfrog.com/confluence/display/JFROG/Choosing+your+Runtime+Image
           custom:
             name: "declarativesystems.jfrog.io/docker/docker-local/nodejs"
-            tag: 0.0.0-2
+            tag: 0.0.0-3
             #options: "-e HOME=/root"
             registry: Artifactory            # if custom image is private, an integration is required for authentication
             sourceRepository: docker-local       # required if registry is Artifactory. e.g. docker-local
 
     steps:
-      - name: bild
-        type: declarativesystems/nodejs
-#        type: NpmBuild
-#        configuration:
-          # ohhhhhhhh this is the repository to READ artifacts from ffs
-#          npmArgs: "--verbose"
-#          repositoryName: npm
-#          sourceLocation: .
+      - name: build
+        type: declarativesystems/NpmBuild
         configuration:
+          sourceArtifactory: Artifactory
+          repositoryName: npm
+          buildCommand: make
           integrations:
             - name: Artifactory
           inputResources:
             - name: gitfklogger
-#
-#        execution:
-##          onStart:
-#            # are u fkin kiddin me?
-##            - pushd $res_gitfklogger_resourcePath
-##            - retry_command jfrog rt config --url $int_Artifactory_url --user $int_Artifactory_user --apikey $int_Artifactory_apikey --interactive=false
-#
-#          onSuccess:
-#            - echo "[✓] build"
-#          onFailure:
-#            - echo "[✖] build - show me ur secrets"
-#            - npm config list
-#            - echo "try to find build logs RAGE:"
-#            - find / -iname build_logs -exec cat {} \;
-#            - find / -iname .npmrc
-#            - cat ~/.npmrc
-#            - cat /root/.npmrc
-#            - cat .npmrc
-#
-#            # - find / -iname stepletScript.sh -exec cat {} \;
-#            - echo "Build environment info:"
-#            - env |grep ^PATH=
-#            - pushd $res_gitfklogger_resourcePath
-#            - node --version
-#            - npm --version
-#            - npm run-script info
-#            - npm run-script info
-#
-
-
-
-      - name: test
-        type: Bash
-        configuration:
-          inputResources:
-            - name: gitfklogger
-          inputSteps:
-            - name: bild
-        execution:
-          onStart:
-            - pushd $res_gitfklogger_resourcePath
-#            - make test
-
       - name: publish
-        type: NpmPublish
+        type: declarativesystems/NpmPublish
         configuration:
-          repositoryName:      npm-local    # required, npm repository name on artifactory
+          sourceArtifactory: Artifactory
+          repositoryName: npm-local    # required, npm repository name on artifactory
           integrations:
             - name:        Artifactory
           inputSteps:
-            - name:         test               # required
-        execution:
-          onStart:
-            - echo "exporting build step name (vital)"
-            - export inputNpmBuildStepName="build"
-          onSuccess:
-            - echo "[✓] publish"
-          onFailure:
-            - echo "[✖] publish"
+            - name:         build               # required
