@@ -46,3 +46,5 @@ pipelines:
             - name:        Artifactory
           inputSteps:
             - name:         build               # required
+          inputResources:
+            - name: gitfklogger
