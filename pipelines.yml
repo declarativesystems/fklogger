@@ -29,6 +29,7 @@ pipelines:
           sourceArtifactory: Artifactory
           repositoryName: npm
           buildCommand: make
+          sourceLocation: $res_gitfklogger_resourcePath
           integrations:
             - name: Artifactory
           inputResources:
@@ -38,6 +39,7 @@ pipelines:
         configuration:
           sourceArtifactory: Artifactory
           repositoryName: npm-local    # required, npm repository name on artifactory
+          sourceLocation: $res_gitfklogger_resourcePath
           integrations:
             - name:        Artifactory
           inputSteps:
