@@ -30,7 +30,7 @@ pipelines:
           repositoryName: npm
           buildCommand: make
           sourceLocation: $res_gitfklogger_resourcePath
-          npmArgs: "--debug"
+          npmArgs: "--verbose"
           integrations:
             - name: Artifactory
           inputResources:
@@ -38,7 +38,7 @@ pipelines:
       - name: publish
         type: declarativesystems/NpmPublish
         configuration:
-          npmArgs: "--debug"
+          npmArgs: "--verbose"
           sourceArtifactory: Artifactory
           repositoryName: npm-local    # required, npm repository name on artifactory
           sourceLocation: $res_gitfklogger_resourcePath
