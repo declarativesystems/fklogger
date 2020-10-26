@@ -3,7 +3,7 @@ resources:
   - name: gitfklogger
     type: GitRepo
     configuration:
-      gitProvider: github_geoffwilliams               # Change to your integration
+      gitProvider: githubPipelines
       path: declarativesystems/fklogger
 pipelines:
   - name:   fklogger
@@ -11,35 +11,30 @@ pipelines:
       runtime:
         type: image
         image:
-          # see https://www.jfrog.com/confluence/display/JFROG/Runtime+Images#RuntimeImages-Go
-
-          # custom image
-          # https://www.jfrog.com/confluence/display/JFROG/Choosing+your+Runtime+Image
           custom:
             name: "declarativesystems.jfrog.io/docker/docker-local/nodejs"
             tag: 0.0.0-4
-            #options: "-e HOME=/root"
-            registry: Artifactory            # if custom image is private, an integration is required for authentication
-            sourceRepository: docker-local       # required if registry is Artifactory. e.g. docker-local
+            registry: artifactory
+            sourceRepository: docker-local
 
     steps:
       - name: build
         type: declarativesystems/NpmBuild
         configuration:
-          sourceArtifactory: Artifactory
+          sourceArtifactory: artifactory
           sourceLocation: $res_gitfklogger_resourcePath
           repositoryName: npm
           buildCommand: make
           integrations:
-            - name: Artifactory
+            - name: artifactory
           inputResources:
             - name: gitfklogger
       - name: publish
         type: declarativesystems/NpmPublish
         configuration:
-          sourceArtifactory: Artifactory
-          repositoryName: npm-local    # required, npm repository name on artifactory
+          sourceArtifactory: artifactory
+          repositoryName: npm-local
           integrations:
-            - name:        Artifactory
+            - name: artifactory
           inputSteps:
-            - name:         build               # required
+            - name: build
