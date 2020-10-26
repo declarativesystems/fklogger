@@ -3,7 +3,7 @@ resources:
   - name: gitfklogger
     type: GitRepo
     configuration:
-      gitProvider: githubPipelines
+      gitProvider: githubAccountGeoffwilliams
       path: declarativesystems/fklogger
 pipelines:
   - name:   fklogger
