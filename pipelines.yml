@@ -12,8 +12,8 @@ pipelines:
         type: image
         image:
           custom:
-            name: "declarativesystems.jfrog.io/docker/docker-local/nodejs"
-            tag: 0.0.0-4
+            name: "declarativesystems.jfrog.io/docker-local/pipelines"
+            tag: "0.2.0-13"
             registry: artifactory
             sourceRepository: docker-local
 
