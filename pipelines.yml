@@ -1,6 +1,6 @@
 apiVersion: v1.1
 resources:
-  - name: gitfklogger
+  - name: gitFkLogger
     type: GitRepo
     configuration:
       gitProvider: githubAccountGeoffwilliams
@@ -23,17 +23,17 @@ pipelines:
         configuration:
           affinityGroup: fkloggerNpm
           sourceArtifactory: artifactory
-          sourceLocation: $res_gitfklogger_resourcePath
+          sourceLocation: $res_gitFkLogger_resourcePath
           repositoryName: npm
           buildCommand: make
           integrations:
             - name: artifactory
           inputResources:
-            - name: gitfklogger
+            - name: gitFkLogger
         execution:
           onSuccess:
-            - cd ${res_gitYolkTracker_resourcePath}
-            - add_pipeline_variables workdir=${res_gitYolkTracker_resourcePath}
+            - cd ${res_gitFkLogger_resourcePath}
+            - add_pipeline_variables workdir=${res_gitFkLogger_resourcePath}
       - name: publish
         type: declarativesystems/NpmPublish
         configuration:
