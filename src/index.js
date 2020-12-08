@@ -47,7 +47,7 @@ export const stdoutLogger = {
 export const fklogger = {
   level: levelInfo,
   tag: "",
-  logger: process
+  logger: typeof(process) && "JEST_WORKER_ID" in process.env
     ? stdoutLogger : consoleLogger,
 
   shouldLog(level) {
