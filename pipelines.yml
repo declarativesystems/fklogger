@@ -30,6 +30,10 @@ pipelines:
             - name: artifactory
           inputResources:
             - name: gitfklogger
+        execution:
+          onSuccess:
+            - cd ${res_gitYolkTracker_resourcePath}
+            - add_pipeline_variables workdir=${res_gitYolkTracker_resourcePath}
       - name: publish
         type: declarativesystems/NpmPublish
         configuration:
@@ -40,3 +44,6 @@ pipelines:
             - name: artifactory
           inputSteps:
             - name: build
+        execution:
+          onStart:
+            - cd ${workdir}
