@@ -21,6 +21,7 @@ pipelines:
       - name: build
         type: declarativesystems/NpmBuild
         configuration:
+          affinityGroup: fkloggerNpm
           sourceArtifactory: artifactory
           sourceLocation: $res_gitfklogger_resourcePath
           repositoryName: npm
@@ -32,6 +33,7 @@ pipelines:
       - name: publish
         type: declarativesystems/NpmPublish
         configuration:
+          affinityGroup: fkloggerNpm
           sourceArtifactory: artifactory
           repositoryName: npm-local
           integrations:
