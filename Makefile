@@ -40,3 +40,5 @@ clean:
 	rm -f yarn.lock
 
 .PHONY: must_rebuild print_version
+
+include buildbot.mk
