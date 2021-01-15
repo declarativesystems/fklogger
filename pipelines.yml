@@ -32,7 +32,7 @@ pipelines:
             - name: slack
           inputResources:
             - name: npmEnvFkLogger
-            - name: gitYolkTracker
+            - name: gitFkLogger
         execution:
           onStart:
             - cd ${res_gitFkLogger_resourcePath}
