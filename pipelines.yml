@@ -5,45 +5,41 @@ resources:
     configuration:
       gitProvider: githubAccountGeoffwilliams
       path: declarativesystems/fklogger
+  - name: npmEnvFkLogger
+    type: declarativesystems/NpmEnv
+    configuration:
+      sourceArtifactory: artifactory
+      repositoryName: npm
+
 pipelines:
-  - name:   fklogger
+  - name: fkLogger
     configuration:
       runtime:
         type: image
         image:
           custom:
             name: "declarativesystems.jfrog.io/docker-local/pipelines"
-            tag: "0.2.0-13"
+            tag: "0.6.1-26"
             registry: artifactory
             sourceRepository: docker-local
 
     steps:
-      - name: build
-        type: declarativesystems/NpmBuild
+      - name: npmBuildAndPublish
+        type: Bash
         configuration:
-          affinityGroup: fkloggerNpm
-          sourceArtifactory: artifactory
-          sourceLocation: $res_gitFkLogger_resourcePath
-          repositoryName: npm
-          buildCommand: make
           integrations:
             - name: artifactory
+            - name: slack
           inputResources:
-            - name: gitFkLogger
-        execution:
-          onSuccess:
-            - cd ${res_gitFkLogger_resourcePath}
-            - add_pipeline_variables workdir=${res_gitFkLogger_resourcePath}
-      - name: publish
-        type: declarativesystems/NpmPublish
-        configuration:
-          affinityGroup: fkloggerNpm
-          sourceArtifactory: artifactory
-          repositoryName: npm-local
-          integrations:
-            - name: artifactory
-          inputSteps:
-            - name: build
+            - name: npmEnvFkLogger
+            - name: gitYolkTracker
         execution:
           onStart:
-            - cd ${workdir}
+            - cd ${res_gitFkLogger_resourcePath}
+            - make ci_notify_start
+            - make build
+            - yarn publish
+          onFailure:
+            - make ci_notify_failure
+          onSuccess:
+            - make ci_notify_complete

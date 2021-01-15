@@ -32,10 +32,11 @@ package.json: must_rebuild
 	cat <<< $$(jq ".version = \"$(final_version)\"" package.json) > package.json
 
 node_modules:
-	npm install
+	yarn install
 
 clean:
 	rm -rf node_modules
 	rm -rf dist
+	rm -f yarn.lock
 
 .PHONY: must_rebuild print_version
