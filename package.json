@@ -38,5 +38,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5"
+  },
+  "publishConfig": {
+    "registry": "https://declarativesystems.jfrog.io/artifactory/api/npm/npm/"
   }
 }
