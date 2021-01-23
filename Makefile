@@ -13,9 +13,6 @@ else
 	final_version = $(base_version)-$(git_rev)
 endif
 
-build: test
-	npm run-script build
-
 test: package.json eslint
 	npm test
 

@@ -37,7 +37,7 @@ pipelines:
           onStart:
             - cd ${res_gitFkLogger_resourcePath}
             - make ci_notify_start
-            - make build
+            - make test
             - yarn publish
           onFailure:
             - make ci_notify_failure
