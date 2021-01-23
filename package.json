@@ -1,6 +1,7 @@
 {
   "name": "fklogger",
-  "base_version": "0.2.0",
+  "type": "module",
+  "base_version": "0.2.1",
   "version": "0.2.0-d7e99ce",
   "description": "fklogger for javascript - log stuff!",
   "main": "dist/index.js",
