@@ -19,7 +19,7 @@ pipelines:
         image:
           custom:
             name: "declarativesystems.jfrog.io/docker-local/pipelines"
-            tag: "0.6.1-26"
+            tag: "0.7.0-27"
             registry: artifactory
             sourceRepository: docker-local
 

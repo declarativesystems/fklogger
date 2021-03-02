@@ -2,12 +2,14 @@ export const levelDebug = "debug";
 export const levelInfo = "info";
 export const levelWarn = "warn";
 export const levelError = "error";
+export const levelOff = "off";
 
 const levels = {
   [levelDebug]: [levelDebug, levelInfo, levelWarn, levelError],
   [levelInfo]: [levelInfo, levelWarn, levelError],
   [levelWarn]: [levelWarn, levelError],
   [levelError]: [levelError],
+  [levelOff]: [],
 };
 
 export const consoleLogger = {
