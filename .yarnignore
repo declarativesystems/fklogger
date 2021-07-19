@@ -1,0 +1,6 @@
+.idea
+*.mk
+Makefile
+*.tgz
+**/*.test.js
+pipelines.yml
