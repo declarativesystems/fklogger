@@ -1,6 +1,7 @@
 import {
   levelDebug, levelInfo, levelWarn, levelError, levelOff, fklogger,
 } from "./index";
+import version from "./version";
 
 beforeEach(async () => {
   // something
@@ -52,5 +53,18 @@ describe("test suite", () => {
     expect(fklogger.shouldLog(levelInfo)).toBe(false);
     expect(fklogger.shouldLog(levelWarn)).toBe(false);
     expect(fklogger.shouldLog(levelError)).toBe(true);
+  });
+
+  test("version works", () => {
+    fklogger.level = levelDebug;
+    fklogger.info(`version: ${version}`);
+    expect(version).toBeDefined();
+  });
+
+  test("tag works", () => {
+    fklogger.level = levelDebug;
+    fklogger.tag = "[something] ";
+    fklogger.info(`version: ${version}`);
+    expect(version).toBeDefined();
   });
 });
